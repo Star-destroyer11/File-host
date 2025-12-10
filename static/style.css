@@ -1,0 +1,69 @@
+body {
+    font-family: 'Orbitron', sans-serif;
+    background-color: #0b0c10;
+    color: #c5c6c7;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-image: url('/static/stars.png');
+    background-repeat: repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    transition: background 0.5s ease-in-out;
+}
+
+body { opacity: 0; animation: fadeIn 1s forwards; }
+@keyframes fadeIn { to { opacity: 1; } }
+
+header { display: flex; flex-direction: column; align-items: center; margin-bottom: 25px; }
+header h1 { color: #66fcf1; font-size: 2.5em; text-shadow: 0 0 15px #66fcf1, 0 0 30px #45a29e; margin: 0; }
+
+#searchForm { margin-top: 15px; display: flex; width: 100%; max-width: 500px; }
+#searchForm input {
+    flex: 1; padding: 10px; font-size: 1em; border: none; border-radius: 6px 0 0 6px; outline: none;
+    background-color: #1f2833; color: #c5c6c7; transition: 0.3s;
+}
+#searchForm input:focus { background-color: #45a29e22; box-shadow: 0 0 10px #66fcf1; }
+#searchForm button {
+    padding: 10px 15px; border: none; background-color: #45a29e; color: #0b0c10; font-weight: bold;
+    cursor: pointer; border-radius: 0 6px 6px 0; transition: 0.3s;
+}
+#searchForm button:hover { background-color: #66fcf1; }
+
+h2, h3 { color: #66fcf1; text-shadow: 0 0 10px #66fcf1, 0 0 25px #45a29e; }
+
+.entries, .directory-list { list-style: none; padding-left: 0; margin-top: 15px; }
+
+.entries li, .directory-list li {
+    position: relative; padding: 8px 12px; margin: 5px 0; border-radius: 6px;
+    background-color: #1f2833aa; cursor: pointer; transition: 0.3s;
+}
+
+.entries li a { position: absolute; top: 0; left: 0; width: 100%; height: 100%; text-decoration: none; }
+.entry-label { position: relative; z-index: 1; color: #c5c6c7; font-weight: 500; }
+
+.entries li:hover { background-color: #45a29e22; box-shadow: 0 0 10px #66fcf1, 0 0 20px #45a29e; }
+.entries li:hover .entry-label { color: #66fcf1; text-shadow: 0 0 8px #66fcf1, 0 0 15px #45a29e; }
+
+.dir::before { content: "🛸 "; }
+.file::before { content: "📀 "; }
+
+.back-button { margin-bottom: 15px; }
+.back-button a {
+    display: inline-block; padding: 10px 20px; background-color: #1f2833aa; color: #66fcf1;
+    text-decoration: none; border-radius: 6px; font-weight: bold; transition: 0.3s;
+}
+.back-button a:hover { background-color: #45a29e22; box-shadow: 0 0 10px #66fcf1, 0 0 20px #45a29e; }
+
+p a { color: #c5c6c7; text-shadow: 0 0 5px #66fcf1; transition: 0.3s; }
+p a:hover { color: #66fcf1; text-shadow: 0 0 10px #66fcf1, 0 0 20px #45a29e; }
+
+.api-section { margin-top: 20px; padding: 15px; border-radius: 8px; background-color: #1f2833aa; }
+
+@media (max-width: 600px) {
+    body { padding: 10px; }
+    header h1 { font-size: 2em; }
+    #searchForm input { padding: 8px; }
+    #searchForm button { padding: 8px 10px; }
+}
+

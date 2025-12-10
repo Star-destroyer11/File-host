@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Current Path: /{{ current_path if current_path else '' }}</h2>
+
+{% if current_path %}
+<div class="back-button">
+    <a href="{{ '/' + parent_path if parent_path else '/' }}">← Back</a>
+</div>
+{% endif %}
+
+<ul class="entries">
+  {% for entry in entries %}
+    <li class="{% if entry.type == 'dir' %}dir{% else %}file{% endif %}">
+        <a href="{% if entry.type == 'dir' %}/{{ (current_path ~ '/' if current_path else '') + entry.name }}/
+                 {% else %}/download/{{ (current_path ~ '/' if current_path else '') + entry.name }}{% endif %}"></a>
+        <span class="entry-label">{{ entry.name }}</span>
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}
+

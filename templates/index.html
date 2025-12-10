@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🌌 Stars File Host</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <h1>🌌 Stars File Host</h1>
+  <h2>Directories</h2>
+  <ul class="directory-list">
+    {% for dir in directories %}
+      <li><a href="/{{ dir }}/">🛸 {{ dir }}/</a></li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
+

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🌌 Stars File Host</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/script.js" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+  <h1>🌌 Stars File Host</h1>
+  <form id="searchForm" action="/search" method="get">
+      <input type="text" name="q" placeholder="Search files or folders..." required>
+      <button type="submit">🔍</button>
+  </form>
+</header>
+<main>
+  {% block content %}{% endblock %}
+</main>
+</body>
+</html>
+
