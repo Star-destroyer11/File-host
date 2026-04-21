@@ -1,69 +1,205 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Orbitron', sans-serif;
-    background-color: #0b0c10;
-    color: #c5c6c7;
-    max-width: 1000px;
-    margin: 0 auto;
+    color: #e3d1ff;
+    background: #050007;
+    min-height: 100vh;
     padding: 20px;
-    background-image: url('/static/stars.png');
-    background-repeat: repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    transition: background 0.5s ease-in-out;
+    position: relative;
+    overflow-x: hidden;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
 }
 
-body { opacity: 0; animation: fadeIn 1s forwards; }
 @keyframes fadeIn { to { opacity: 1; } }
 
-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 25px; }
-header h1 { color: #66fcf1; font-size: 2.5em; text-shadow: 0 0 15px #66fcf1, 0 0 30px #45a29e; margin: 0; }
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(124,58,237,0.55), transparent 70%);
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: -3;
+}
 
-#searchForm { margin-top: 15px; display: flex; width: 100%; max-width: 500px; }
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 42px 42px;
+    opacity: 0.25;
+    pointer-events: none;
+    z-index: -2;
+}
+
+.floating-frame {
+    position: fixed;
+    width: 420px;
+    height: 420px;
+    border: 2px solid rgba(168,85,247,0.25);
+    border-radius: 20%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: spin-slow 18s linear infinite;
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes spin-slow {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-size: 3.2em;
+    font-weight: 900;
+    color: #d28cff;
+    text-shadow: 0 0 30px rgba(124,58,237,0.55);
+}
+
+#searchForm {
+    margin: 20px auto 0;
+    display: flex;
+    width: 100%;
+    max-width: 500px;
+}
+
 #searchForm input {
-    flex: 1; padding: 10px; font-size: 1em; border: none; border-radius: 6px 0 0 6px; outline: none;
-    background-color: #1f2833; color: #c5c6c7; transition: 0.3s;
+    flex: 1;
+    padding: 12px;
+    font-size: 1em;
+    border: none;
+    border-radius: 8px 0 0 8px;
+    background-color: #150020;
+    color: #e3d1ff;
+    transition: 0.3s;
 }
-#searchForm input:focus { background-color: #45a29e22; box-shadow: 0 0 10px #66fcf1; }
+
+#searchForm input:focus {
+    background-color: #9b4dff22;
+    box-shadow: 0 0 12px #d28cff;
+}
+
 #searchForm button {
-    padding: 10px 15px; border: none; background-color: #45a29e; color: #0b0c10; font-weight: bold;
-    cursor: pointer; border-radius: 0 6px 6px 0; transition: 0.3s;
+    padding: 12px 18px;
+    border: none;
+    background-color: #9b4dff;
+    color: #050007;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 0 8px 8px 0;
+    transition: 0.3s;
 }
-#searchForm button:hover { background-color: #66fcf1; }
 
-h2, h3 { color: #66fcf1; text-shadow: 0 0 10px #66fcf1, 0 0 25px #45a29e; }
+#searchForm button:hover {
+    background-color: #d28cff;
+    box-shadow: 0 0 15px #d28cff;
+}
 
-.entries, .directory-list { list-style: none; padding-left: 0; margin-top: 15px; }
+h2, h3 {
+    color: #d28cff;
+    text-shadow: 0 0 12px #d28cff, 0 0 25px #9b4dff;
+    margin-top: 25px;
+}
+
+.entries, .directory-list {
+    list-style: none;
+    margin-top: 15px;
+}
 
 .entries li, .directory-list li {
-    position: relative; padding: 8px 12px; margin: 5px 0; border-radius: 6px;
-    background-color: #1f2833aa; cursor: pointer; transition: 0.3s;
+    background-color: #150020cc;
+    padding: 10px 14px;
+    margin: 6px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.3s;
 }
 
-.entries li a { position: absolute; top: 0; left: 0; width: 100%; height: 100%; text-decoration: none; }
-.entry-label { position: relative; z-index: 1; color: #c5c6c7; font-weight: 500; }
+.entries li:hover {
+    background-color: #9b4dff22;
+    box-shadow: 0 0 12px #d28cff, 0 0 25px #9b4dff;
+}
 
-.entries li:hover { background-color: #45a29e22; box-shadow: 0 0 10px #66fcf1, 0 0 20px #45a29e; }
-.entries li:hover .entry-label { color: #66fcf1; text-shadow: 0 0 8px #66fcf1, 0 0 15px #45a29e; }
+.entries li a {
+    position: absolute;
+    inset: 0;
+    text-decoration: none;
+}
 
-.dir::before { content: "🛸 "; }
-.file::before { content: "📀 "; }
+.entry-label {
+    position: relative;
+    z-index: 1;
+    color: #e3d1ff;
+    font-weight: 500;
+}
 
-.back-button { margin-bottom: 15px; }
+.entries li:hover .entry-label {
+    color: #d28cff;
+    text-shadow: 0 0 10px #d28cff;
+}
+
+.dir::before { content: "📁 "; }
+.file::before { content: "📄 "; }
+
+.back-button {
+    margin: 20px 0;
+}
+
 .back-button a {
-    display: inline-block; padding: 10px 20px; background-color: #1f2833aa; color: #66fcf1;
-    text-decoration: none; border-radius: 6px; font-weight: bold; transition: 0.3s;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #150020cc;
+    color: #d28cff;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s;
 }
-.back-button a:hover { background-color: #45a29e22; box-shadow: 0 0 10px #66fcf1, 0 0 20px #45a29e; }
 
-p a { color: #c5c6c7; text-shadow: 0 0 5px #66fcf1; transition: 0.3s; }
-p a:hover { color: #66fcf1; text-shadow: 0 0 10px #66fcf1, 0 0 20px #45a29e; }
+.back-button a:hover {
+    background-color: #9b4dff22;
+    box-shadow: 0 0 12px #d28cff;
+}
 
-.api-section { margin-top: 20px; padding: 15px; border-radius: 8px; background-color: #1f2833aa; }
+p a {
+    color: #e3d1ff;
+    text-shadow: 0 0 5px #d28cff;
+    transition: 0.3s;
+}
+
+p a:hover {
+    color: #d28cff;
+    text-shadow: 0 0 12px #d28cff;
+}
+
+.api-section {
+    background-color: #150020cc;
+    padding: 18px;
+    border-radius: 10px;
+    margin-top: 25px;
+}
 
 @media (max-width: 600px) {
-    body { padding: 10px; }
-    header h1 { font-size: 2em; }
-    #searchForm input { padding: 8px; }
-    #searchForm button { padding: 8px 10px; }
+    body { padding: 12px; }
+    header h1 { font-size: 2.4em; }
+    #searchForm input { padding: 10px; }
+    #searchForm button { padding: 10px 14px; }
 }
-
