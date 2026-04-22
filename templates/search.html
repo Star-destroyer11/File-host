@@ -1,19 +1,30 @@
-{% extends "layout.html" %}
+{% extends "base.html" %}
 {% block content %}
-<h2>Search Results for "{{ query }}"</h2>
+
+<h2>Search results for "{{ query }}"</h2>
+
+{% if parent_path is not none %}
+<div class="back-button">
+    <a href="{{ url_for('browse', subpath=parent_path) }}">⬅ Back</a>
+</div>
+{% endif %}
+
 
 {% if results %}
 <ul class="entries">
-  {% for entry in results %}
-    <li class="{% if entry.type == 'dir' %}dir{% else %}file{% endif %}">
-        <a href="{% if entry.type == 'dir' %}/{{ entry.path }}/
-                 {% else %}/download/{{ entry.path }}{% endif %}"></a>
-        <span class="entry-label">{{ entry.name }}</span>
+    {% for r in results %}
+    <li class="{{ r.type }}">
+        {% if r.type == 'dir' %}
+            <a href="{{ url_for('browse', subpath=r.path) }}/"></a>
+        {% else %}
+            <a href="{{ url_for('download', subpath=r.path) }}"></a>
+        {% endif %}
+        <span class="entry-label">{{ r.name }}</span>
     </li>
-  {% endfor %}
+    {% endfor %}
 </ul>
 {% else %}
 <p>No results found.</p>
 {% endif %}
-{% endblock %}
 
+{% endblock %}
