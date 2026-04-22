@@ -49,7 +49,6 @@ def search_files(query):
         rel_root = os.path.relpath(root, BASE_FOLDER)
         rel_root = "" if rel_root == "." else rel_root
 
-        # Folder match
         folder_name = os.path.basename(root)
         if query in folder_name.lower() and rel_root != "":
             results.append({
@@ -80,7 +79,6 @@ def browse(subpath):
 
     entries = get_all_files(dir_path)
 
-    # FIXED parent path logic
     if not subpath:
         parent_path = None
     elif '/' in subpath:
